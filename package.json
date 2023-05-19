@@ -1,0 +1,63 @@
+{
+  "name": "copy-stack",
+  "displayName": "Copy Stack",
+  "description": "Implements a copy stack to the user's clipboard",
+  "repository": "https://github.com/rafaellfaria/copy-stack",
+  "publisher": "rafaellfaria",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:copy-stack.copy",
+    "onCommand:copy-stack.paste"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "keybindings": [
+      {
+        "key": "ctrl+c",
+        "mac": "cmd+c",
+        "command": "runCommands",
+        "args": {
+          "commands": [
+            "editor.action.clipboardCopyAction",
+            "copy-stack.copy"
+          ]
+        },
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+v",
+        "mac": "cmd+v",
+        "command": "runCommands",
+        "args": {
+          "commands": [
+            "copy-stack.paste",
+            "editor.action.clipboardPasteAction"
+          ]
+        },
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.78.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
+  }
+}
